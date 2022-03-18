@@ -25,7 +25,6 @@ else:
     print("Введено неверное значение")
 
 
-
 str_to_conv = input("введите строку: ")
 bin_result = ' '.join(format(ord(x), 'b') for x in str_to_conv)
 bin1_result = ''.join(format(ord(x), 'b') for x in str_to_conv)
@@ -49,8 +48,25 @@ for i in range(len(bin2_result)):
     d = gr[a[1]-1]
     print("d= ",d)
     e = c+d
-    i = i+1
+    if (e%2==0):
+        e=0
+    else:
+        e=1
+    #теперь второй сумматор
+    c1 = gr[b[0]-1]
+    d1 = gr[b[1]-1]
+    e1 = c1+d1
+    if (e1%2==0):
+        e1=0
+    else:
+        e1=1
     zakodirovannaya_posledovatelnost.append(e)
+    zakodirovannaya_posledovatelnost.append(e1)
+    i = i+1
 print(zakodirovannaya_posledovatelnost)
+zakodirovannaya_posledovatelnost1 = ''.join(str(n) for n in zakodirovannaya_posledovatelnost)
+print(zakodirovannaya_posledovatelnost1)
+   
+
    
 
