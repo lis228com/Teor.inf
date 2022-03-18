@@ -38,12 +38,19 @@ bin2_result = list(bin1_result)
 for i in range(len(bin1_result)):
     bin2_result[i] = int(bin2_result[i])
 print(bin2_result)
-gr = [0,0,0]
-for i in range(len(bin2_result)-1):
-    c = bin2_result[i]
-    d = bin2_result[i+1]
+gr = [0,0,0]   #список для сумматоров. Из этого списка берутся эл-ты и складываются на сумматоре
+zakodirovannaya_posledovatelnost = []  #в этот список будем класть элементы, получившиеся на сумматоре(сумматорах)
+
+#Теперь пишем алгоритм для сумматора. Если сумматоров>1, то сделать функцию.
+for i in range(len(bin2_result)):
+    gr.insert(0,bin2_result[i])
+    c = gr[a[0]-1]
+    print("c= ",c)
+    d = gr[a[1]-1]
+    print("d= ",d)
     e = c+d
     i = i+1
-    gr.append(e)
-print(gr)
+    zakodirovannaya_posledovatelnost.append(e)
+print(zakodirovannaya_posledovatelnost)
    
+
