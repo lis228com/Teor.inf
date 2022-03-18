@@ -1,8 +1,11 @@
+#Первый абзац - ввод информации
 kolvo_summatorov = int(input("Введите число сумматоров"))
 if (kolvo_summatorov == 1):
     a = input("Введите регистры для первого сумматора: ")
     a = a.split(",")
     a = list(a)
+    for i in range(len(a)):
+        a[i] = int(a[i])
     print(a)#убедившись в правильности, принты можно убрать. Чисто для проверки
 elif(kolvo_summatorov == 2):
     a = input("Введите регистры для первого сумматора: ")
@@ -11,11 +14,17 @@ elif(kolvo_summatorov == 2):
     b = b.split(",")
     a = list(a)
     b = list(b)
+    for i in range(len(a)):
+        a[i] = int(a[i])
+    for i in range(len(b)):
+        b[i] = int(b[i])
     print(a)
     print(b)
-#затем через элиф добавим 3 сумматора. А в else напишем, чтобы выводило ошибку (например, если ноль сумматоров).
+#затем через элиф добавим 3 сумматора. А в else напишем, чтобы выводило ошибку (например, если ноль сумматоров)
 else:
     print("Введено неверное значение")
+
+
 
 str_to_conv = input("введите строку: ")
 bin_result = ' '.join(format(ord(x), 'b') for x in str_to_conv)
@@ -25,12 +34,11 @@ print(bin_result)#строка бит с пробелами (каждый сим
 revert = ''.join([chr(int(s, 2)) for s in bin_result.split()])#из двоичной в обычную
 print(revert)
 print(len(bin1_result))
-print(bin1_result[1])
 bin2_result = list(bin1_result)
-for i in range(7):
+for i in range(len(bin1_result)):
     bin2_result[i] = int(bin2_result[i])
 print(bin2_result)
-gr = []
+gr = [0,0,0]
 for i in range(len(bin2_result)-1):
     c = bin2_result[i]
     d = bin2_result[i+1]
