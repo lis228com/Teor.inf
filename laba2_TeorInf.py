@@ -25,6 +25,7 @@ else:
     print("Введено неверное значение")
 
 
+
 str_to_conv = input("введите строку: ")
 bin_result = ' '.join(format(ord(x), 'b') for x in str_to_conv)
 bin1_result = ''.join(format(ord(x), 'b') for x in str_to_conv)
@@ -66,6 +67,34 @@ for i in range(len(bin2_result)):
 print(zakodirovannaya_posledovatelnost)
 zakodirovannaya_posledovatelnost1 = ''.join(str(n) for n in zakodirovannaya_posledovatelnost)
 print(zakodirovannaya_posledovatelnost1)
+
+#кодирование ЗАВЕРШЕНО
+#Теперь декодируем
+
+a_=[]
+b_ = [0,0,0,1,0,0,0,1,0,1,1,0,0,0,1,1,0,1,0,1,1,1,1,1]
+#for i in range(6):
+c2 = str(b_[a[0]-1])
+d2 = str(b_[a[1]-1])
+e2 = c2+d2
+print(e2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
    
 
    
