@@ -70,25 +70,45 @@ print(zakodirovannaya_posledovatelnost1)
 
 #кодирование ЗАВЕРШЕНО
 #Теперь декодируем
-
+#Сделаем функцию
 gr1=[]
-b_ = [0,0,0,1,0,0,0,1,0,1,1,0,0,0,1,1,0,1,0,1,1,1,1,1]
-for i in range(???):
-    c2 = b_[a[0]-1]
-    d2 = b_[a[1]-1]
-    e2 = c2+d2
-    c3 = b_[b[0]-1]
-    d3 = b_[b[1]-1]
-    e3 = c3+d3
-    if (e2 != zakodirovannaya_posledovatelnost[i]) and (e3 != zakodirovannaya_posledovatelnost[i+1]):
-        gr1.append(e2)
-        gr1.append(e3)
-    b_.pop[0]
-    b_.pop[1]
-    b._pop[2]
-    print("b_=", b_)
-    i = i+2
+#b_ = [0,0,0,1,0,0,0,1,0,1,1,0,0,0,1,1,0,1,0,1,1,1,1,1]
+def func1(x,y,z,):
+    b_ = [x,y,z]
+    c2 = int(b_[a[0]-1])
+    d2 = int(b_[a[1]-1])
+    e2 = str(c2+d2)
+    c3 = int(b_[b[0]-1])
+    d3 = int(b_[b[1]-1])
+    e3 = str(c3+d3)
+    gr1.append(e2+e3)
+    return(gr1)
+func1(0,0,0)
+func1(1,0,0)
+func1(0,1,0)
+func1(1,1,0)
+func1(0,0,1)
+func1(1,0,1)
+func1(0,1,1)
+func1(1,1,1)
 print(gr1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
 
 
 
