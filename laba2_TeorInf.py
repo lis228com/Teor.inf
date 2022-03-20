@@ -71,13 +71,24 @@ print(zakodirovannaya_posledovatelnost1)
 #кодирование ЗАВЕРШЕНО
 #Теперь декодируем
 
-a_=[]
+gr1=[]
 b_ = [0,0,0,1,0,0,0,1,0,1,1,0,0,0,1,1,0,1,0,1,1,1,1,1]
-#for i in range(6):
-c2 = str(b_[a[0]-1])
-d2 = str(b_[a[1]-1])
-e2 = c2+d2
-print(e2)
+for i in range(???):
+    c2 = b_[a[0]-1]
+    d2 = b_[a[1]-1]
+    e2 = c2+d2
+    c3 = b_[b[0]-1]
+    d3 = b_[b[1]-1]
+    e3 = c3+d3
+    if (e2 != zakodirovannaya_posledovatelnost[i]) and (e3 != zakodirovannaya_posledovatelnost[i+1]):
+        gr1.append(e2)
+        gr1.append(e3)
+    b_.pop[0]
+    b_.pop[1]
+    b._pop[2]
+    print("b_=", b_)
+    i = i+2
+print(gr1)
 
 
 
