@@ -129,15 +129,50 @@ G.add_edge("01(2)", "00(3)", weight=ves(zakodirovannaya_posledovatelnost[4],zako
 G.add_edge("01(2)", "10(3)", weight=ves(zakodirovannaya_posledovatelnost[4],zakodirovannaya_posledovatelnost[5],gr1[10],gr1[11]))
 G.add_edge("11(2)", "01(3)", weight=ves(zakodirovannaya_posledovatelnost[4],zakodirovannaya_posledovatelnost[5],gr1[12],gr1[13]))
 G.add_edge("11(2)", "11(3)", weight=ves(zakodirovannaya_posledovatelnost[4],zakodirovannaya_posledovatelnost[5],gr1[14],gr1[15]))
+G.add_edge("00(3)", "00(4)", weight=ves(zakodirovannaya_posledovatelnost[6],zakodirovannaya_posledovatelnost[7],gr1[0],gr1[1]))
+G.add_edge("00(3)", "10(4)", weight=ves(zakodirovannaya_posledovatelnost[6],zakodirovannaya_posledovatelnost[7],gr1[2],gr1[3]))
+G.add_edge("10(3)", "01(4)", weight=ves(zakodirovannaya_posledovatelnost[6],zakodirovannaya_posledovatelnost[7],gr1[4],gr1[5]))
+G.add_edge("10(3)", "11(4)", weight=ves(zakodirovannaya_posledovatelnost[6],zakodirovannaya_posledovatelnost[7],gr1[6],gr1[7]))
+G.add_edge("01(3)", "00(4)", weight=ves(zakodirovannaya_posledovatelnost[6],zakodirovannaya_posledovatelnost[7],gr1[8],gr1[9]))
+G.add_edge("01(3)", "10(4)", weight=ves(zakodirovannaya_posledovatelnost[6],zakodirovannaya_posledovatelnost[7],gr1[10],gr1[11]))
+G.add_edge("11(3)", "01(4)", weight=ves(zakodirovannaya_posledovatelnost[6],zakodirovannaya_posledovatelnost[7],gr1[12],gr1[13]))
+G.add_edge("11(3)", "11(4)", weight=ves(zakodirovannaya_posledovatelnost[6],zakodirovannaya_posledovatelnost[7],gr1[14],gr1[15]))
+G.add_edge("00(4)", "00(5)", weight=ves(zakodirovannaya_posledovatelnost[8],zakodirovannaya_posledovatelnost[9],gr1[0],gr1[1]))
+G.add_edge("00(4)", "10(5)", weight=ves(zakodirovannaya_posledovatelnost[8],zakodirovannaya_posledovatelnost[9],gr1[2],gr1[3]))
+G.add_edge("10(4)", "01(5)", weight=ves(zakodirovannaya_posledovatelnost[8],zakodirovannaya_posledovatelnost[9],gr1[4],gr1[5]))
+G.add_edge("10(4)", "11(5)", weight=ves(zakodirovannaya_posledovatelnost[8],zakodirovannaya_posledovatelnost[9],gr1[6],gr1[7]))
+G.add_edge("01(4)", "00(5)", weight=ves(zakodirovannaya_posledovatelnost[8],zakodirovannaya_posledovatelnost[9],gr1[8],gr1[9]))
+G.add_edge("01(4)", "10(5)", weight=ves(zakodirovannaya_posledovatelnost[8],zakodirovannaya_posledovatelnost[9],gr1[10],gr1[11]))
+G.add_edge("11(4)", "01(5)", weight=ves(zakodirovannaya_posledovatelnost[8],zakodirovannaya_posledovatelnost[9],gr1[12],gr1[13]))
+G.add_edge("11(4)", "11(5)", weight=ves(zakodirovannaya_posledovatelnost[8],zakodirovannaya_posledovatelnost[9],gr1[14],gr1[15]))
+
 
  
 pos = nx.spring_layout(G)
 nx.draw(G, pos, with_labels=True)
 labels = nx.get_edge_attributes(G, 'weight')
 nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
-print(nx.dijkstra_path(G,"00(0)","01(3)"))
+print(nx.dijkstra_path(G,"00(0)","01(5)"))
+print(nx.dijkstra_path(G,"00(0)","01(3)")[0])
+print(nx.dijkstra_path(G,"00(0)","01(3)")[0][0])
+
  
 plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
 
 
 
