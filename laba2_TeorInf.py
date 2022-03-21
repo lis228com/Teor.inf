@@ -1,5 +1,7 @@
+import networkx as nx
+import matplotlib.pyplot as plt
 #Первый абзац - ввод информации
-kolvo_summatorov = int(input("Введите число сумматоров"))
+kolvo_summatorov = int(input("Введите число сумматоров: "))
 if (kolvo_summatorov == 1):
     a = input("Введите регистры для первого сумматора: ")
     a = a.split(",")
@@ -77,11 +79,13 @@ def func1(x,y,z,):
     b_ = [x,y,z]
     c2 = int(b_[a[0]-1])
     d2 = int(b_[a[1]-1])
-    e2 = str(c2+d2)
+    e2 = str((c2+d2)%2)
     c3 = int(b_[b[0]-1])
     d3 = int(b_[b[1]-1])
-    e3 = str(c3+d3)
-    gr1.append(e2+e3)
+    e3 = str((c3+d3)%2)
+    #gr1.append(e2+e3)
+    gr1.append(e2)
+    gr1.append(e3)
     return(gr1)
 func1(0,0,0)
 func1(1,0,0)
@@ -92,6 +96,51 @@ func1(1,0,1)
 func1(0,1,1)
 func1(1,1,1)
 print(gr1)
+
+#строим граф. Его вес рассчитаем зараннее в отдельных переменных (??? как-то в цикле реализовать для разного кол-ва эл-тов)
+
+G = nx.Graph()
+ 
+nodes = ["00(0)", "00(1)", "10(1)", "00(2)", "10(2)","01(2)","11(2)","00(3)","10(3)","01(3)","11(3)"]#узлы зададим точками на диаграмме Витерби. Опять же, вопрос в динамическом образовании этих точек
+G.add_nodes_from(nodes)
+ 
+G.add_edge("00(0)", "00(1)", weight=1.0)
+G.add_edge("00(0)", "10(1)", weight=2.0)
+G.add_edge("00(1)", "00(2)", weight=3.0)
+G.add_edge("00(1)", "10(2)", weight=4.0)
+G.add_edge("10(1)", "01(2)", weight=5.0)
+G.add_edge("10(1)", "11(2)", weight=6.0)
+G.add_edge("00(2)", "00(3)", weight=7.0)
+G.add_edge("00(2)", "10(3)", weight=8.0)
+G.add_edge("10(2)", "01(3)", weight=9.0)
+G.add_edge("10(2)", "11(3)", weight=1.0)
+G.add_edge("01(2)", "00(3)", weight=1.0)
+G.add_edge("01(2)", "10(3)", weight=2.0)
+G.add_edge("11(2)", "01(3)", weight=3.0)
+G.add_edge("11(2)", "11(3)", weight=4.0)
+
+ 
+pos = nx.spring_layout(G)
+nx.draw(G, pos, with_labels=True)
+labels = nx.get_edge_attributes(G, 'weight')
+nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+print(nx.dijkstra_path(G,"00(0)","01(2)"))
+ 
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
 
 
 
