@@ -98,35 +98,62 @@ func1(1,1,1)
 print(gr1)
 
 #строим граф. Его вес рассчитаем зараннее в отдельных переменных (??? как-то в цикле реализовать для разного кол-ва эл-тов)
+#Перед этим напишем функцию для расчета веса
+def ves(e,e_,k,k_): #Здесь к и к_ - это ноль либо единица на графе Витерби, а е и е_ - это ноль либо единица в получившейся последовательности после кодирования.
+    summ = 0
+    if (k != int(gr[e])):
+        summ = summ +1
+    if (k_ != int(gr1[e_])):
+        summ = summ + 1
+    return summ
 
+
+
+
+    
 G = nx.Graph()
  
 nodes = ["00(0)", "00(1)", "10(1)", "00(2)", "10(2)","01(2)","11(2)","00(3)","10(3)","01(3)","11(3)"]#узлы зададим точками на диаграмме Витерби. Опять же, вопрос в динамическом образовании этих точек
 G.add_nodes_from(nodes)
  
-G.add_edge("00(0)", "00(1)", weight=1.0)
-G.add_edge("00(0)", "10(1)", weight=2.0)
-G.add_edge("00(1)", "00(2)", weight=3.0)
-G.add_edge("00(1)", "10(2)", weight=4.0)
-G.add_edge("10(1)", "01(2)", weight=5.0)
-G.add_edge("10(1)", "11(2)", weight=6.0)
-G.add_edge("00(2)", "00(3)", weight=7.0)
-G.add_edge("00(2)", "10(3)", weight=8.0)
-G.add_edge("10(2)", "01(3)", weight=9.0)
-G.add_edge("10(2)", "11(3)", weight=1.0)
-G.add_edge("01(2)", "00(3)", weight=1.0)
-G.add_edge("01(2)", "10(3)", weight=2.0)
-G.add_edge("11(2)", "01(3)", weight=3.0)
-G.add_edge("11(2)", "11(3)", weight=4.0)
+G.add_edge("00(0)", "00(1)", weight=ves(zakodirovannaya_posledovatelnost1[0],zakodirovannaya_posledovatelnost1[1],int(gr1[0]),int(gr1[1])))
+G.add_edge("00(0)", "10(1)", weight=ves(zakodirovannaya_posledovatelnost1[0],zakodirovannaya_posledovatelnost1[1],int(gr1[2]),int(gr1[3])))
+G.add_edge("00(1)", "00(2)", weight=ves(zakodirovannaya_posledovatelnost1[2],zakodirovannaya_posledovatelnost1[3],int(gr1[0]),int(gr1[1])))
+G.add_edge("00(1)", "10(2)", weight=ves(zakodirovannaya_posledovatelnost1[2],zakodirovannaya_posledovatelnost1[3],int(gr1[2]),int(gr1[3])))
+G.add_edge("10(1)", "01(2)", weight=ves(zakodirovannaya_posledovatelnost1[2],zakodirovannaya_posledovatelnost1[3],int(gr1[4]),int(gr1[5])))
+G.add_edge("10(1)", "11(2)", weight=ves(zakodirovannaya_posledovatelnost1[2],zakodirovannaya_posledovatelnost1[3],int(gr1[6]),int(gr1[7])))
+G.add_edge("00(2)", "00(3)", weight=ves(zakodirovannaya_posledovatelnost1[4],zakodirovannaya_posledovatelnost1[5],int(gr1[0]),int(gr1[1])))
+G.add_edge("00(2)", "10(3)", weight=ves(zakodirovannaya_posledovatelnost1[4],zakodirovannaya_posledovatelnost1[5],int(gr1[2]),int(gr1[3])))
+G.add_edge("10(2)", "01(3)", weight=ves(zakodirovannaya_posledovatelnost1[4],zakodirovannaya_posledovatelnost1[5],int(gr1[4]),int(gr1[5])))
+G.add_edge("10(2)", "11(3)", weight=ves(zakodirovannaya_posledovatelnost1[4],zakodirovannaya_posledovatelnost1[5],int(gr1[6]),int(gr1[7])))
+G.add_edge("01(2)", "00(3)", weight=ves(zakodirovannaya_posledovatelnost1[4],zakodirovannaya_posledovatelnost1[5],int(gr1[8]),int(gr1[9])))
+G.add_edge("01(2)", "10(3)", weight=ves(zakodirovannaya_posledovatelnost1[4],zakodirovannaya_posledovatelnost1[5],int(gr1[10]),int(gr1[11])))
+G.add_edge("11(2)", "01(3)", weight=ves(zakodirovannaya_posledovatelnost1[4],zakodirovannaya_posledovatelnost1[5],int(gr1[12]),int(gr1[13])))
+G.add_edge("11(2)", "11(3)", weight=ves(zakodirovannaya_posledovatelnost1[4],zakodirovannaya_posledovatelnost1[5],int(gr1[14]),int(gr1[15])))
 
  
 pos = nx.spring_layout(G)
 nx.draw(G, pos, with_labels=True)
 labels = nx.get_edge_attributes(G, 'weight')
 nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
-print(nx.dijkstra_path(G,"00(0)","01(2)"))
+print(nx.dijkstra_path(G,"00(0)","10(3)"))
  
 plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
 
 
 
