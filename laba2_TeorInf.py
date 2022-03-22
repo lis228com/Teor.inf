@@ -68,7 +68,7 @@ for i in range(len(bin2_result)):
     i = i+1
 print(zakodirovannaya_posledovatelnost)
 zakodirovannaya_posledovatelnost1 = ''.join(str(n) for n in zakodirovannaya_posledovatelnost)
-print(zakodirovannaya_posledovatelnost1)
+print("Получили закодированную строку: ",zakodirovannaya_posledovatelnost1)
 
 #кодирование ЗАВЕРШЕНО
 #Теперь декодируем
@@ -103,14 +103,19 @@ print(gr1)
 #Перед этим напишем функцию для расчета веса
 def ves(e,e_,k,k_): #Здесь к и к_ - это ноль либо единица на графе Витерби, а е и е_ - это ноль либо единица в получившейся последовательности после кодирования.
     summ = 0
-    if (k == gr1[e]):
+    if (k != e):
         summ = summ +1
-    if (k_ == gr1[e_]):
+    else:
+        summ = summ
+    if (k_ != e_):
         summ = summ + 1
+    else:
+        summ = summ
     return summ
 
 
-G = nx.Graph()
+
+G = nx.DiGraph()
  
 nodes = ["00(0)", "00(1)", "10(1)", "00(2)", "10(2)","01(2)","11(2)","00(3)","10(3)","01(3)","11(3)"]#узлы зададим точками на диаграмме Витерби. Опять же, вопрос в динамическом образовании этих точек
 G.add_nodes_from(nodes)
@@ -145,6 +150,22 @@ G.add_edge("01(4)", "00(5)", weight=ves(zakodirovannaya_posledovatelnost[8],zako
 G.add_edge("01(4)", "10(5)", weight=ves(zakodirovannaya_posledovatelnost[8],zakodirovannaya_posledovatelnost[9],gr1[10],gr1[11]))
 G.add_edge("11(4)", "01(5)", weight=ves(zakodirovannaya_posledovatelnost[8],zakodirovannaya_posledovatelnost[9],gr1[12],gr1[13]))
 G.add_edge("11(4)", "11(5)", weight=ves(zakodirovannaya_posledovatelnost[8],zakodirovannaya_posledovatelnost[9],gr1[14],gr1[15]))
+G.add_edge("00(5)", "00(6)", weight=ves(zakodirovannaya_posledovatelnost[10],zakodirovannaya_posledovatelnost[11],gr1[0],gr1[1]))
+G.add_edge("00(5)", "10(6)", weight=ves(zakodirovannaya_posledovatelnost[10],zakodirovannaya_posledovatelnost[11],gr1[2],gr1[3]))
+G.add_edge("10(5)", "01(6)", weight=ves(zakodirovannaya_posledovatelnost[10],zakodirovannaya_posledovatelnost[11],gr1[4],gr1[5]))
+G.add_edge("10(5)", "11(6)", weight=ves(zakodirovannaya_posledovatelnost[10],zakodirovannaya_posledovatelnost[11],gr1[6],gr1[7]))
+G.add_edge("01(5)", "00(6)", weight=ves(zakodirovannaya_posledovatelnost[10],zakodirovannaya_posledovatelnost[11],gr1[8],gr1[9]))
+G.add_edge("01(5)", "10(6)", weight=ves(zakodirovannaya_posledovatelnost[10],zakodirovannaya_posledovatelnost[11],gr1[10],gr1[11]))
+G.add_edge("11(5)", "01(6)", weight=ves(zakodirovannaya_posledovatelnost[10],zakodirovannaya_posledovatelnost[11],gr1[12],gr1[13]))
+G.add_edge("11(5)", "11(6)", weight=ves(zakodirovannaya_posledovatelnost[10],zakodirovannaya_posledovatelnost[11],gr1[14],gr1[15]))
+G.add_edge("00(6)", "00(7)", weight=ves(zakodirovannaya_posledovatelnost[12],zakodirovannaya_posledovatelnost[13],gr1[0],gr1[1]))
+G.add_edge("00(6)", "10(7)", weight=ves(zakodirovannaya_posledovatelnost[12],zakodirovannaya_posledovatelnost[13],gr1[2],gr1[3]))
+G.add_edge("10(6)", "01(7)", weight=ves(zakodirovannaya_posledovatelnost[12],zakodirovannaya_posledovatelnost[13],gr1[4],gr1[5]))
+G.add_edge("10(6)", "11(7)", weight=ves(zakodirovannaya_posledovatelnost[12],zakodirovannaya_posledovatelnost[13],gr1[6],gr1[7]))
+G.add_edge("01(6)", "00(7)", weight=ves(zakodirovannaya_posledovatelnost[12],zakodirovannaya_posledovatelnost[13],gr1[8],gr1[9]))
+G.add_edge("01(6)", "10(7)", weight=ves(zakodirovannaya_posledovatelnost[12],zakodirovannaya_posledovatelnost[13],gr1[10],gr1[11]))
+G.add_edge("11(6)", "01(7)", weight=ves(zakodirovannaya_posledovatelnost[12],zakodirovannaya_posledovatelnost[13],gr1[12],gr1[13]))
+G.add_edge("11(6)", "11(7)", weight=ves(zakodirovannaya_posledovatelnost[12],zakodirovannaya_posledovatelnost[13],gr1[14],gr1[15]))
 
 
  
@@ -152,12 +173,34 @@ pos = nx.spring_layout(G)
 nx.draw(G, pos, with_labels=True)
 labels = nx.get_edge_attributes(G, 'weight')
 nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
-print(nx.dijkstra_path(G,"00(0)","01(5)"))
-print(nx.dijkstra_path(G,"00(0)","01(3)")[0])
-print(nx.dijkstra_path(G,"00(0)","01(3)")[0][0])
 
- 
+#теперь сравним 4 пути и выбираем с наименьшим весом - это и будет "наш"
+gr2 = []
+if (nx.dijkstra_path_length(G,"10(1)","00(7)")==0):
+    print(nx.dijkstra_path(G,"10(1)","00(7)"))
+    for i in range(7):
+        gr2.append(nx.dijkstra_path(G,"10(1)","00(7)")[i][0])
+    print("Изначальная последовательность: ",gr2)
+elif (nx.dijkstra_path_length(G,"10(1)","01(7)")==0):
+    print(nx.dijkstra_path(G,"10(1)","01(7)"))
+    for i in range(7):
+        gr2.append(nx.dijkstra_path(G,"10(1)","01(7)")[i][0])
+    print("Изначальная последовательность: ",gr2)
+elif (nx.dijkstra_path_length(G,"10(1)","10(7)")==0):
+    print(nx.dijkstra_path(G,"10(1)","10(7)"))
+    for i in range(7):
+        gr2.append(nx.dijkstra_path(G,"10(1)","10(7)")[i][0])
+    print("Изначальная последовательность: ",gr2)
+elif (nx.dijkstra_path_length(G,"10(1)","11(7)")==0):
+    print(nx.dijkstra_path(G,"10(1)","11(7)"))
+    for i in range(7):
+        gr2.append(nx.dijkstra_path(G,"10(1)","11(7)")[i][0])
+    print("Изначальная последовательность: ",gr2)
+else:
+    print("Путей с весом ноль нет")
+
 plt.show()
+
 
 
 
