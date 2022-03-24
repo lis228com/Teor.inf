@@ -33,9 +33,6 @@ bin_result = ' '.join(format(ord(x), 'b') for x in str_to_conv)
 bin1_result = ''.join(format(ord(x), 'b') for x in str_to_conv)
 print(bin1_result)#строка из двоичного кода без пробелов
 print(bin_result)#строка бит с пробелами (каждый символ отдельно)
-revert = ''.join([chr(int(s, 2)) for s in bin_result.split()])#из двоичной в обычную
-print(revert)
-print(len(bin1_result))
 bin2_result = list(bin1_result)
 for i in range(len(bin1_result)):
     bin2_result[i] = int(bin2_result[i])
@@ -74,7 +71,6 @@ print("Получили закодированную строку: ",zakodirovan
 #Теперь декодируем
 #Сделаем функцию
 gr1=[]
-#b_ = [0,0,0,1,0,0,0,1,0,1,1,0,0,0,1,1,0,1,0,1,1,1,1,1]
 def func1(x,y,z,):
     b_ = [x,y,z]
     c2 = int(b_[a[0]-1])
@@ -99,7 +95,7 @@ for i in range(len(gr1)):
     gr1[i] = int(gr1[i])
 print(gr1)
 
-#строим граф. Его вес рассчитаем зараннее в отдельных переменных (??? как-то в цикле реализовать для разного кол-ва эл-тов)
+#строим граф. Его вес рассчитаем зараннее в отдельных переменных
 #Перед этим напишем функцию для расчета веса
 def ves(e,e_,k,k_): #Здесь к и к_ - это ноль либо единица на графе Витерби, а е и е_ - это ноль либо единица в получившейся последовательности после кодирования.
     summ = 0
@@ -176,30 +172,50 @@ nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
 
 #теперь сравним 4 пути и выбираем с наименьшим весом - это и будет "наш"
 gr2 = []
-if (nx.dijkstra_path_length(G,"10(1)","00(7)")==0):
-    print(nx.dijkstra_path(G,"10(1)","00(7)"))
-    for i in range(7):
-        gr2.append(nx.dijkstra_path(G,"10(1)","00(7)")[i][0])
+if (nx.dijkstra_path_length(G,"00(0)","00(7)")==0):
+    print(nx.dijkstra_path(G,"00(0)","00(7)"))
+    for i in range(1,8):
+        gr2.append(nx.dijkstra_path(G,"00(0)","00(7)")[i][0])
     print("Изначальная последовательность: ",gr2)
-elif (nx.dijkstra_path_length(G,"10(1)","01(7)")==0):
-    print(nx.dijkstra_path(G,"10(1)","01(7)"))
-    for i in range(7):
-        gr2.append(nx.dijkstra_path(G,"10(1)","01(7)")[i][0])
+elif (nx.dijkstra_path_length(G,"00(0)","01(7)")==0):
+    print(nx.dijkstra_path(G,"00(0)","01(7)"))
+    for i in range(1,8):
+        gr2.append(nx.dijkstra_path(G,"00(0)","01(7)")[i][0])
     print("Изначальная последовательность: ",gr2)
-elif (nx.dijkstra_path_length(G,"10(1)","10(7)")==0):
-    print(nx.dijkstra_path(G,"10(1)","10(7)"))
-    for i in range(7):
-        gr2.append(nx.dijkstra_path(G,"10(1)","10(7)")[i][0])
+elif (nx.dijkstra_path_length(G,"00(0)","10(7)")==0):
+    print(nx.dijkstra_path(G,"00(0)","10(7)"))
+    for i in range(1,8):
+        gr2.append(nx.dijkstra_path(G,"00(0)","10(7)")[i][0])
     print("Изначальная последовательность: ",gr2)
-elif (nx.dijkstra_path_length(G,"10(1)","11(7)")==0):
-    print(nx.dijkstra_path(G,"10(1)","11(7)"))
-    for i in range(7):
-        gr2.append(nx.dijkstra_path(G,"10(1)","11(7)")[i][0])
+elif (nx.dijkstra_path_length(G,"00(0)","11(7)")==0):
+    print(nx.dijkstra_path(G,"00(0)","11(7)"))
+    for i in range(1,8):
+        gr2.append(nx.dijkstra_path(G,"00(0)","11(7)")[i][0])
     print("Изначальная последовательность: ",gr2)
 else:
     print("Путей с весом ноль нет")
 
 plt.show()
+
+#преобразуем последовательность в изначальную строку
+strOfStrings = ''.join(gr2)
+print(strOfStrings)
+revert = ''.join([chr(int(s, 2)) for s in strOfStrings.split()])#из двоичной в обычную
+print(revert)
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
 
 
 
