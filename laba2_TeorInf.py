@@ -1,31 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 #Первый абзац - ввод информации
-kolvo_summatorov = int(input("Введите число сумматоров: "))
-if (kolvo_summatorov == 1):
-    a = input("Введите регистры для первого сумматора: ")
-    a = a.split(",")
-    a = list(a)
-    for i in range(len(a)):
-        a[i] = int(a[i])
-    print(a)#убедившись в правильности, принты можно убрать. Чисто для проверки
-elif(kolvo_summatorov == 2):
-    a = input("Введите регистры для первого сумматора: ")
-    b = input("Введите регистры для второго сумматора: ")
-    a = a.split(",")
-    b = b.split(",")
-    a = list(a)
-    b = list(b)
-    for i in range(len(a)):
-        a[i] = int(a[i])
-    for i in range(len(b)):
-        b[i] = int(b[i])
-    print(a)
-    print(b)
-#затем через элиф добавим 3 сумматора. А в else напишем, чтобы выводило ошибку (например, если ноль сумматоров)
-else:
-    print("Введено неверное значение")
-
 
 
 str_to_conv = input("введите строку: ")
@@ -40,36 +15,129 @@ print(bin2_result)
 gr = [0,0,0]   #список для сумматоров. Из этого списка берутся эл-ты и складываются на сумматоре
 zakodirovannaya_posledovatelnost = []  #в этот список будем класть элементы, получившиеся на сумматоре(сумматорах)
 
-#Теперь пишем алгоритм для сумматора. Если сумматоров>1, то сделать функцию.
-for i in range(len(bin2_result)):
-    gr.insert(0,bin2_result[i])
-    c = gr[a[0]-1]
-    print("c= ",c)
-    d = gr[a[1]-1]
-    print("d= ",d)
-    e = c+d
-    if (e%2==0):
-        e=0
-    else:
-        e=1
+
+
+kolvo_summatorov = int(input("Введите число сумматоров: "))
+if (kolvo_summatorov == 1):
+    a = input("Введите регистры для первого сумматора: ")
+    a = a.split(",")
+    a = list(a)
+    for i in range(len(a)):
+        a[i] = int(a[i])
+    print(a)#убедившись в правильности, принты можно убрать. Чисто для проверки
+
+    #Теперь пишем алгоритм для сумматора. Если сумматоров>1, то сделать функцию.
+    for i in range(len(bin2_result)):
+        gr.insert(0,bin2_result[i])
+        c = gr[a[0]-1]
+        d = gr[a[1]-1]
+        e = c+d
+        if (e%2==0):
+            e=0
+        else:
+            e=1
+        zakodirovannaya_posledovatelnost.append(e)
+        zakodirovannaya_posledovatelnost.append(e1)
+        i = i+1
+    print(zakodirovannaya_posledovatelnost)
+    zakodirovannaya_posledovatelnost1 = ''.join(str(n) for n in zakodirovannaya_posledovatelnost)
+    print("Получили закодированную строку: ",zakodirovannaya_posledovatelnost1)
+    
+elif (kolvo_summatorov == 2):
+    a = input("Введите регистры для первого сумматора: ")
+    b = input("Введите регистры для второго сумматора: ")
+    a = a.split(",")
+    b = b.split(",")
+    a = list(a)
+    b = list(b)
+    for i in range(len(a)):
+        a[i] = int(a[i])
+    for i in range(len(b)):
+        b[i] = int(b[i])
+    print(a)
+    print(b)
+    for i in range(len(bin2_result)):
+        gr.insert(0,bin2_result[i])
+        c = gr[a[0]-1]
+        d = gr[a[1]-1]
+        e = c+d
+        if (e%2==0):
+            e=0
+        else:
+            e=1
     #теперь второй сумматор
-    c1 = gr[b[0]-1]
-    d1 = gr[b[1]-1]
-    e1 = c1+d1
-    if (e1%2==0):
-        e1=0
-    else:
-        e1=1
-    zakodirovannaya_posledovatelnost.append(e)
-    zakodirovannaya_posledovatelnost.append(e1)
-    i = i+1
-print(zakodirovannaya_posledovatelnost)
-zakodirovannaya_posledovatelnost1 = ''.join(str(n) for n in zakodirovannaya_posledovatelnost)
-print("Получили закодированную строку: ",zakodirovannaya_posledovatelnost1)
+        c1 = gr[b[0]-1]
+        d1 = gr[b[1]-1]
+        e1 = c1+d1
+        if (e1%2==0):
+            e1=0
+        else:
+            e1=1
+        zakodirovannaya_posledovatelnost.append(e)
+        zakodirovannaya_posledovatelnost.append(e1)
+        i = i+1
+    print(zakodirovannaya_posledovatelnost)
+    zakodirovannaya_posledovatelnost1 = ''.join(str(n) for n in zakodirovannaya_posledovatelnost)
+    print("Получили закодированную строку: ",zakodirovannaya_posledovatelnost1)
+
+elif (kolvo_summatorov ==3):
+    a = input("Введите регистры для первого сумматора: ")
+    b = input("Введите регистры для второго сумматора: ")
+    z = input("Введите регистры для третьего сумматора: ")
+    a = a.split(",")
+    b = b.split(",")
+    z = z.split(",")
+    a = list(a)
+    b = list(b)
+    z = list(z)
+    for i in range(len(a)):
+        a[i] = int(a[i])
+    for i in range(len(b)):
+        b[i] = int(b[i])
+    for i in range (len(z)):
+        z[i] = int(z[i])
+    print(a)
+    print(b)
+    print(z)
+    for i in range(len(bin2_result)):
+        gr.insert(0,bin2_result[i])
+        c = gr[a[0]-1]
+        d = gr[a[1]-1]
+        e = c+d
+        if (e%2==0):
+            e=0
+        else:
+            e=1
+    #теперь второй сумматор
+        c1 = gr[b[0]-1]
+        d1 = gr[b[1]-1]
+        e1 = c1+d1
+        if (e1%2==0):
+            e1=0
+        else:
+            e1=1
+        c2 = gr[z[0]-1]
+        d2 = gr[z[1]-1]
+        e2 = c2+d2
+        if (e2%2==0):
+            e2=0
+        else:
+            e2=1
+        zakodirovannaya_posledovatelnost.append(e)
+        zakodirovannaya_posledovatelnost.append(e1)
+        zakodirovannaya_posledovatelnost.append(e2)
+        i = i+1
+    print(zakodirovannaya_posledovatelnost)
+    zakodirovannaya_posledovatelnost1 = ''.join(str(n) for n in zakodirovannaya_posledovatelnost)
+    print("Получили закодированную строку: ",zakodirovannaya_posledovatelnost1)
+
+else:
+    print("Введено неверное значение")
+
 
 #кодирование ЗАВЕРШЕНО
 #Теперь декодируем
-#Сделаем функцию
+#Сделаем функцию (это цифры над линиями в Витерби)
 gr1=[]
 def func1(x,y,z,):
     b_ = [x,y,z]
@@ -112,7 +180,6 @@ def ves(e,e_,k,k_): #Здесь к и к_ - это ноль либо едини�
 
 
 G = nx.DiGraph()
- 
 nodes = ["00(0)", "00(1)", "10(1)", "00(2)", "10(2)","01(2)","11(2)","00(3)","10(3)","01(3)","11(3)"]#узлы зададим точками на диаграмме Витерби. Опять же, вопрос в динамическом образовании этих точек
 G.add_nodes_from(nodes)
  
@@ -172,22 +239,23 @@ nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
 
 #теперь сравним 4 пути и выбираем с наименьшим весом - это и будет "наш"
 gr2 = []
-if (nx.dijkstra_path_length(G,"00(0)","00(7)")==0):
+min=100
+if (nx.dijkstra_path_length(G,"00(0)","00(7)") < nx.dijkstra_path_length(G,"00(0)","01(7)")) and (nx.dijkstra_path_length(G,"00(0)","00(7)") < nx.dijkstra_path_length(G,"00(0)","10(7)")) and (nx.dijkstra_path_length(G,"00(0)","00(7)") < nx.dijkstra_path_length(G,"00(0)","11(7)")) :
     print(nx.dijkstra_path(G,"00(0)","00(7)"))
     for i in range(1,8):
         gr2.append(nx.dijkstra_path(G,"00(0)","00(7)")[i][0])
     print("Изначальная последовательность: ",gr2)
-elif (nx.dijkstra_path_length(G,"00(0)","01(7)")==0):
+elif (nx.dijkstra_path_length(G,"00(0)","01(7)") < nx.dijkstra_path_length(G,"00(0)","00(7)")) and (nx.dijkstra_path_length(G,"00(0)","01(7)") < nx.dijkstra_path_length(G,"00(0)","10(7)")) and (nx.dijkstra_path_length(G,"00(0)","01(7)") < nx.dijkstra_path_length(G,"00(0)","11(7)")):
     print(nx.dijkstra_path(G,"00(0)","01(7)"))
     for i in range(1,8):
         gr2.append(nx.dijkstra_path(G,"00(0)","01(7)")[i][0])
     print("Изначальная последовательность: ",gr2)
-elif (nx.dijkstra_path_length(G,"00(0)","10(7)")==0):
+elif (nx.dijkstra_path_length(G,"00(0)","10(7)") < nx.dijkstra_path_length(G,"00(0)","00(7)")) and (nx.dijkstra_path_length(G,"00(0)","10(7)") < nx.dijkstra_path_length(G,"00(0)","01(7)")) and (nx.dijkstra_path_length(G,"00(0)","10(7)") < nx.dijkstra_path_length(G,"00(0)","11(7)")):
     print(nx.dijkstra_path(G,"00(0)","10(7)"))
     for i in range(1,8):
         gr2.append(nx.dijkstra_path(G,"00(0)","10(7)")[i][0])
     print("Изначальная последовательность: ",gr2)
-elif (nx.dijkstra_path_length(G,"00(0)","11(7)")==0):
+elif (nx.dijkstra_path_length(G,"00(0)","11(7)") < nx.dijkstra_path_length(G,"00(0)","00(7)")) and (nx.dijkstra_path_length(G,"00(0)","11(7)") < nx.dijkstra_path_length(G,"00(0)","10(7)")) and (nx.dijkstra_path_length(G,"00(0)","11(7)") < nx.dijkstra_path_length(G,"00(0)","01(7)")):
     print(nx.dijkstra_path(G,"00(0)","11(7)"))
     for i in range(1,8):
         gr2.append(nx.dijkstra_path(G,"00(0)","11(7)")[i][0])
@@ -206,6 +274,15 @@ print(revert)
 
 
 
+
+
+
+
+
+
+
+
+   
 
 
 
