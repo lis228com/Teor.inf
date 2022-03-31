@@ -15,6 +15,12 @@ print(bin2_result)
 gr = [0,0,0]   #список для сумматоров. Из этого списка берутся эл-ты и складываются на сумматоре
 zakodirovannaya_posledovatelnost = []  #в этот список будем класть элементы, получившиеся на сумматоре(сумматорах)
 
+gr5 = []
+for i in range(len(bin_result)):
+    if bin_result[i]==" ":
+        gr5.append(i)
+print("gr5",gr5)
+
 
 
 kolvo_summatorov = int(input("Введите число сумматоров: "))
@@ -116,6 +122,7 @@ elif (kolvo_summatorov ==3):
             e1=0
         else:
             e1=1
+        #третий
         c2_ = gr[z[0]-1]
         d2_ = gr[z[1]-1]
         e2_ = c2_+d2_
@@ -159,6 +166,7 @@ func1(0,0,1)
 func1(1,0,1)
 func1(0,1,1)
 func1(1,1,1)
+#func1(1,1,1)#строка нужна, чтобы в графе не возникало ошибки list index out of range
 for i in range(len(gr1)):
     gr1[i] = int(gr1[i])
 print(gr1)
@@ -181,7 +189,7 @@ def ves(e,e_,k,k_): #Здесь к и к_ - это ноль либо едини�
 
 G = nx.DiGraph()
 nodes = []
-for i in range(len(bin1_result)+1):
+for i in range(len(bin1_result)+1):#цикл для создания узлов графа
     u = "00"
     u_ = "10"
     u__ = "01"
@@ -196,117 +204,89 @@ print("Список узлов",nodes)
 #nodes = ["00(0)", "00(1)", "10(1)", "00(2)", "10(2)","01(2)","11(2)","00(3)","10(3)","01(3)","11(3)"]#узлы зададим точками на диаграмме Витерби. Опять же, вопрос в динамическом образовании этих точек
 G.add_nodes_from(nodes)
 
-def func3(index1,index2):
+def func3(index1,index2):#функция для постройки графа
     G.add_edge(nodes[index1], nodes[index1+4], weight=ves(zakodirovannaya_posledovatelnost[index2],zakodirovannaya_posledovatelnost[index2+1],gr1[0],gr1[1]))
-    G.add_edge(nodes[index1], nodes[index1+6], weight=ves(zakodirovannaya_posledovatelnost[index2],zakodirovannaya_posledovatelnost[index2+1],gr1[2],gr1[3]))
-    G.add_edge(nodes[index1+1], nodes[index1+6], weight=ves(zakodirovannaya_posledovatelnost[index2],zakodirovannaya_posledovatelnost[index2+1],gr1[8],gr1[9]))
-    G.add_edge(nodes[index1+1], nodes[index1+7], weight=ves(zakodirovannaya_posledovatelnost[index2],zakodirovannaya_posledovatelnost[index2+1],gr1[10],gr1[11]))
-    G.add_edge(nodes[index1+2], nodes[index1+4], weight=ves(zakodirovannaya_posledovatelnost[index2],zakodirovannaya_posledovatelnost[index2+1],gr1[4],gr1[5]))
-    G.add_edge(nodes[index1+2], nodes[index1+5], weight=ves(zakodirovannaya_posledovatelnost[index2],zakodirovannaya_posledovatelnost[index2+1],gr1[6],gr1[7]))
-    G.add_edge(nodes[index1+3], nodes[index1+5], weight=ves(zakodirovannaya_posledovatelnost[index2],zakodirovannaya_posledovatelnost[index2+1],gr1[12],gr1[13]))
+    G.add_edge(nodes[index1], nodes[index1+5], weight=ves(zakodirovannaya_posledovatelnost[index2],zakodirovannaya_posledovatelnost[index2+1],gr1[2],gr1[3]))
+    G.add_edge(nodes[index1+1], nodes[index1+6], weight=ves(zakodirovannaya_posledovatelnost[index2],zakodirovannaya_posledovatelnost[index2+1],gr1[4],gr1[5]))
+    G.add_edge(nodes[index1+1], nodes[index1+7], weight=ves(zakodirovannaya_posledovatelnost[index2],zakodirovannaya_posledovatelnost[index2+1],gr1[6],gr1[7]))
+    G.add_edge(nodes[index1+2], nodes[index1+4], weight=ves(zakodirovannaya_posledovatelnost[index2],zakodirovannaya_posledovatelnost[index2+1],gr1[8],gr1[9]))
+    G.add_edge(nodes[index1+2], nodes[index1+5], weight=ves(zakodirovannaya_posledovatelnost[index2],zakodirovannaya_posledovatelnost[index2+1],gr1[10],gr1[11]))
+    G.add_edge(nodes[index1+3], nodes[index1+6], weight=ves(zakodirovannaya_posledovatelnost[index2],zakodirovannaya_posledovatelnost[index2+1],gr1[12],gr1[13]))
     G.add_edge(nodes[index1+3], nodes[index1+7], weight=ves(zakodirovannaya_posledovatelnost[index2],zakodirovannaya_posledovatelnost[index2+1],gr1[14],gr1[15]))
-func3(0,0)
-func3(4,2)
-func3(8,4)
-func3(12,6)
-func3(16,8)
-func3(20,10)
-func3(24,12)
-#func3(28,14)
 
-    
- 
-#G.add_edge("00(0)", "00(1)", weight=ves(zakodirovannaya_posledovatelnost[0],zakodirovannaya_posledovatelnost[1],gr1[0],gr1[1]))
-#G.add_edge("00(0)", "10(1)", weight=ves(zakodirovannaya_posledovatelnost[0],zakodirovannaya_posledovatelnost[1],gr1[2],gr1[3]))
-#G.add_edge("00(1)", "00(2)", weight=ves(zakodirovannaya_posledovatelnost[2],zakodirovannaya_posledovatelnost[3],gr1[0],gr1[1]))
-#G.add_edge("00(1)", "10(2)", weight=ves(zakodirovannaya_posledovatelnost[2],zakodirovannaya_posledovatelnost[3],gr1[2],gr1[3]))
-#G.add_edge("10(1)", "01(2)", weight=ves(zakodirovannaya_posledovatelnost[2],zakodirovannaya_posledovatelnost[3],gr1[4],gr1[5]))
-#G.add_edge("10(1)", "11(2)", weight=ves(zakodirovannaya_posledovatelnost[2],zakodirovannaya_posledovatelnost[3],gr1[6],gr1[7]))
-#G.add_edge("00(2)", "00(3)", weight=ves(zakodirovannaya_posledovatelnost[4],zakodirovannaya_posledovatelnost[5],gr1[0],gr1[1]))
-#G.add_edge("00(2)", "10(3)", weight=ves(zakodirovannaya_posledovatelnost[4],zakodirovannaya_posledovatelnost[5],gr1[2],gr1[3]))
-#G.add_edge("10(2)", "01(3)", weight=ves(zakodirovannaya_posledovatelnost[4],zakodirovannaya_posledovatelnost[5],gr1[4],gr1[5]))
-#G.add_edge("10(2)", "11(3)", weight=ves(zakodirovannaya_posledovatelnost[4],zakodirovannaya_posledovatelnost[5],gr1[6],gr1[7]))
-#G.add_edge("01(2)", "00(3)", weight=ves(zakodirovannaya_posledovatelnost[4],zakodirovannaya_posledovatelnost[5],gr1[8],gr1[9]))
-#G.add_edge("01(2)", "10(3)", weight=ves(zakodirovannaya_posledovatelnost[4],zakodirovannaya_posledovatelnost[5],gr1[10],gr1[11]))
-#G.add_edge("11(2)", "01(3)", weight=ves(zakodirovannaya_posledovatelnost[4],zakodirovannaya_posledovatelnost[5],gr1[12],gr1[13]))
-#G.add_edge("11(2)", "11(3)", weight=ves(zakodirovannaya_posledovatelnost[4],zakodirovannaya_posledovatelnost[5],gr1[14],gr1[15]))
-#G.add_edge("00(3)", "00(4)", weight=ves(zakodirovannaya_posledovatelnost[6],zakodirovannaya_posledovatelnost[7],gr1[0],gr1[1]))
-#G.add_edge("00(3)", "10(4)", weight=ves(zakodirovannaya_posledovatelnost[6],zakodirovannaya_posledovatelnost[7],gr1[2],gr1[3]))
-#G.add_edge("10(3)", "01(4)", weight=ves(zakodirovannaya_posledovatelnost[6],zakodirovannaya_posledovatelnost[7],gr1[4],gr1[5]))
-#G.add_edge("10(3)", "11(4)", weight=ves(zakodirovannaya_posledovatelnost[6],zakodirovannaya_posledovatelnost[7],gr1[6],gr1[7]))
-#G.add_edge("01(3)", "00(4)", weight=ves(zakodirovannaya_posledovatelnost[6],zakodirovannaya_posledovatelnost[7],gr1[8],gr1[9]))
-#G.add_edge("01(3)", "10(4)", weight=ves(zakodirovannaya_posledovatelnost[6],zakodirovannaya_posledovatelnost[7],gr1[10],gr1[11]))
-#G.add_edge("11(3)", "01(4)", weight=ves(zakodirovannaya_posledovatelnost[6],zakodirovannaya_posledovatelnost[7],gr1[12],gr1[13]))
-#G.add_edge("11(3)", "11(4)", weight=ves(zakodirovannaya_posledovatelnost[6],zakodirovannaya_posledovatelnost[7],gr1[14],gr1[15]))
-#G.add_edge("00(4)", "00(5)", weight=ves(zakodirovannaya_posledovatelnost[8],zakodirovannaya_posledovatelnost[9],gr1[0],gr1[1]))
-#G.add_edge("00(4)", "10(5)", weight=ves(zakodirovannaya_posledovatelnost[8],zakodirovannaya_posledovatelnost[9],gr1[2],gr1[3]))
-#G.add_edge("10(4)", "01(5)", weight=ves(zakodirovannaya_posledovatelnost[8],zakodirovannaya_posledovatelnost[9],gr1[4],gr1[5]))
-#G.add_edge("10(4)", "11(5)", weight=ves(zakodirovannaya_posledovatelnost[8],zakodirovannaya_posledovatelnost[9],gr1[6],gr1[7]))
-#G.add_edge("01(4)", "00(5)", weight=ves(zakodirovannaya_posledovatelnost[8],zakodirovannaya_posledovatelnost[9],gr1[8],gr1[9]))
-#G.add_edge("01(4)", "10(5)", weight=ves(zakodirovannaya_posledovatelnost[8],zakodirovannaya_posledovatelnost[9],gr1[10],gr1[11]))
-#G.add_edge("11(4)", "01(5)", weight=ves(zakodirovannaya_posledovatelnost[8],zakodirovannaya_posledovatelnost[9],gr1[12],gr1[13]))
-#G.add_edge("11(4)", "11(5)", weight=ves(zakodirovannaya_posledovatelnost[8],zakodirovannaya_posledovatelnost[9],gr1[14],gr1[15]))
-#G.add_edge("00(5)", "00(6)", weight=ves(zakodirovannaya_posledovatelnost[10],zakodirovannaya_posledovatelnost[11],gr1[0],gr1[1]))
-#G.add_edge("00(5)", "10(6)", weight=ves(zakodirovannaya_posledovatelnost[10],zakodirovannaya_posledovatelnost[11],gr1[2],gr1[3]))
-#G.add_edge("10(5)", "01(6)", weight=ves(zakodirovannaya_posledovatelnost[10],zakodirovannaya_posledovatelnost[11],gr1[4],gr1[5]))
-#G.add_edge("10(5)", "11(6)", weight=ves(zakodirovannaya_posledovatelnost[10],zakodirovannaya_posledovatelnost[11],gr1[6],gr1[7]))
-#G.add_edge("01(5)", "00(6)", weight=ves(zakodirovannaya_posledovatelnost[10],zakodirovannaya_posledovatelnost[11],gr1[8],gr1[9]))
-#G.add_edge("01(5)", "10(6)", weight=ves(zakodirovannaya_posledovatelnost[10],zakodirovannaya_posledovatelnost[11],gr1[10],gr1[11]))
-#G.add_edge("11(5)", "01(6)", weight=ves(zakodirovannaya_posledovatelnost[10],zakodirovannaya_posledovatelnost[11],gr1[12],gr1[13]))
-#G.add_edge("11(5)", "11(6)", weight=ves(zakodirovannaya_posledovatelnost[10],zakodirovannaya_posledovatelnost[11],gr1[14],gr1[15]))
-#G.add_edge("00(6)", "00(7)", weight=ves(zakodirovannaya_posledovatelnost[12],zakodirovannaya_posledovatelnost[13],gr1[0],gr1[1]))
-#G.add_edge("00(6)", "10(7)", weight=ves(zakodirovannaya_posledovatelnost[12],zakodirovannaya_posledovatelnost[13],gr1[2],gr1[3]))
-#G.add_edge("10(6)", "01(7)", weight=ves(zakodirovannaya_posledovatelnost[12],zakodirovannaya_posledovatelnost[13],gr1[4],gr1[5]))
-#G.add_edge("10(6)", "11(7)", weight=ves(zakodirovannaya_posledovatelnost[12],zakodirovannaya_posledovatelnost[13],gr1[6],gr1[7]))
-#G.add_edge("01(6)", "00(7)", weight=ves(zakodirovannaya_posledovatelnost[12],zakodirovannaya_posledovatelnost[13],gr1[8],gr1[9]))
-#G.add_edge("01(6)", "10(7)", weight=ves(zakodirovannaya_posledovatelnost[12],zakodirovannaya_posledovatelnost[13],gr1[10],gr1[11]))
-#G.add_edge("11(6)", "01(7)", weight=ves(zakodirovannaya_posledovatelnost[12],zakodirovannaya_posledovatelnost[13],gr1[12],gr1[13]))
-#G.add_edge("11(6)", "11(7)", weight=ves(zakodirovannaya_posledovatelnost[12],zakodirovannaya_posledovatelnost[13],gr1[14],gr1[15]))
+m_=0
+n_=0
+for i in range(len(bin1_result)):#цикл для создания всех ребер графа.
+        func3(m_,n_)
+        m_=m_+4
+        n_=n_+2
+#func3(0,0)
+#func3(4,2)
+#func3(8,4)
+#func3(12,6)
+#func3(16,8)
+#func3(20,10)
+#func3(24,12)
 
 
- 
 pos = nx.spring_layout(G)
 nx.draw(G, pos, with_labels=True)
 labels = nx.get_edge_attributes(G, 'weight')
 nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
 
-#теперь сравним 4 пути и выбираем с наименьшим весом - это и будет "наш"
-print("вес1",nx.dijkstra_path_length(G,"000","006"))
-print("вес2",nx.dijkstra_path_length(G,"000","106"))
-print("вес3",nx.dijkstra_path_length(G,"000","016"))
-print("вес4",nx.dijkstra_path_length(G,"000","116"))
+
 gr2 = []
 min=100
-if (nx.dijkstra_path_length(G,"000","006") < nx.dijkstra_path_length(G,"000","016")) and (nx.dijkstra_path_length(G,"000","006") < nx.dijkstra_path_length(G,"000","106")) and (nx.dijkstra_path_length(G,"000","006") < nx.dijkstra_path_length(G,"000","116")) :
-    print(nx.dijkstra_path(G,"000","006"))
-    for i in range(1,8):
-        gr2.append(nx.dijkstra_path(G,"000","006")[i][0])
+if (nx.dijkstra_path_length(G,"000",nodes[-4]) < nx.dijkstra_path_length(G,"000",nodes[-2])) and (nx.dijkstra_path_length(G,"000",nodes[-4]) < nx.dijkstra_path_length(G,"000",nodes[-3])) and (nx.dijkstra_path_length(G,"000",nodes[-4]) < nx.dijkstra_path_length(G,"000",nodes[-1])) :
+    print(nx.dijkstra_path(G,"000",nodes[-4]))
+    for i in range(1,len(bin1_result)+1):
+        gr2.append(nx.dijkstra_path(G,"000",nodes[-4])[i][0])
     print("Изначальная последовательность: ",gr2)
-elif (nx.dijkstra_path_length(G,"000","016") < nx.dijkstra_path_length(G,"000","006")) and (nx.dijkstra_path_length(G,"000","016") < nx.dijkstra_path_length(G,"000","106")) and (nx.dijkstra_path_length(G,"000","016") < nx.dijkstra_path_length(G,"000","116")):
-    print(nx.dijkstra_path(G,"000","016"))
-    for i in range(1,8):
-        gr2.append(nx.dijkstra_path(G,"000","016")[i][0])
+elif (nx.dijkstra_path_length(G,"000",nodes[-2]) < nx.dijkstra_path_length(G,"000",nodes[-4])) and (nx.dijkstra_path_length(G,"000",nodes[-2]) < nx.dijkstra_path_length(G,"000",nodes[-3])) and (nx.dijkstra_path_length(G,"000",nodes[-2]) < nx.dijkstra_path_length(G,"000",nodes[-1])):
+    print(nx.dijkstra_path(G,"000",nodes[-2]))
+    for i in range(1,len(bin1_result)+1):
+        gr2.append(nx.dijkstra_path(G,"000",nodes[-2])[i][0])
     print("Изначальная последовательность: ",gr2)
-elif (nx.dijkstra_path_length(G,"000","106") < nx.dijkstra_path_length(G,"000","006")) and (nx.dijkstra_path_length(G,"000","106") < nx.dijkstra_path_length(G,"000","016")) and (nx.dijkstra_path_length(G,"000","106") < nx.dijkstra_path_length(G,"000","116")):
-    print(nx.dijkstra_path(G,"000","106"))
-    for i in range(1,8):
-        gr2.append(nx.dijkstra_path(G,"000","106")[i][0])
+elif (nx.dijkstra_path_length(G,"000",nodes[-3]) < nx.dijkstra_path_length(G,"000",nodes[-4])) and (nx.dijkstra_path_length(G,"000",nodes[-3]) < nx.dijkstra_path_length(G,"000",nodes[-2])) and (nx.dijkstra_path_length(G,"000",nodes[-3]) < nx.dijkstra_path_length(G,"000",nodes[-1])):
+    print(nx.dijkstra_path(G,"000",nodes[-3]))
+    for i in range(1,len(bin1_result)+1):
+        gr2.append(nx.dijkstra_path(G,"000",nodes[-3])[i][0])
     print("Изначальная последовательность: ",gr2)
-elif (nx.dijkstra_path_length(G,"000","116") < nx.dijkstra_path_length(G,"000","006")) and (nx.dijkstra_path_length(G,"000","116") < nx.dijkstra_path_length(G,"000","106")) and (nx.dijkstra_path_length(G,"000","116") < nx.dijkstra_path_length(G,"000","016")):
-    print(nx.dijkstra_path(G,"000","116"))
-    for i in range(1,8):
-        gr2.append(nx.dijkstra_path(G,"000","116")[i][0])
+elif (nx.dijkstra_path_length(G,"000",nodes[-1]) < nx.dijkstra_path_length(G,"000",nodes[-4])) and (nx.dijkstra_path_length(G,"000",nodes[-1]) < nx.dijkstra_path_length(G,"000",nodes[-3])) and (nx.dijkstra_path_length(G,"000",nodes[-1]) < nx.dijkstra_path_length(G,"000",nodes[-2])):
+    print(nx.dijkstra_path(G,"000",nodes[-1]))
+    for i in range(1,len(bin1_result)+1):
+        gr2.append(nx.dijkstra_path(G,"000",nodes[-1])[i][0])
     print("Изначальная последовательность: ",gr2)
 else:
     print("Путей с весом ноль нет")
 
 plt.show()
 
+
+
+
 #преобразуем последовательность в изначальную строку
+#strOfStrings = ''.join(gr2)
+for i in range(len(str_to_conv)-1):
+    gr2.insert(gr5[i]," ")
 strOfStrings = ''.join(gr2)
 print(strOfStrings)
 revert = ''.join([chr(int(s, 2)) for s in strOfStrings.split()])#из двоичной в обычную
 print(revert)
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
 
 
 
