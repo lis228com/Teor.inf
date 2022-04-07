@@ -23,122 +23,29 @@ for i in range(len(bin_result)):
 print("gr5", gr5)
 
 kolvo_summatorov = int(input("Введите число сумматоров: "))
-if (kolvo_summatorov == 1):
-    a = input("Введите регистры для первого сумматора: ")
-    a = a.split(",")
-    a = list(a)
-    for i in range(len(a)):
-        a[i] = int(a[i])
-    print(a)  # убедившись в правильности, принты можно убрать. Чисто для проверки
+spisok=[]
+kolvo_summatorov = int(input("Введите число сумматоров: "))
+for i in range(kolvo_summatorov):
+    spisok.append([int(y) for y in input("Введите регистры для n-го сумматора: ").split()])
+print(spisok)
 
     # Теперь пишем алгоритм для сумматора. Если сумматоров>1, то сделать функцию.
-    for i in range(len(bin2_result)):
-        gr.insert(0, bin2_result[i])
-        c = gr[a[0] - 1]
-        d = gr[a[1] - 1]
+for i in range(len(bin2_result)):
+    gr.insert(0, bin2_result[i])
+    j=0
+    for j in range(kolvo_summatorov):
+        c = gr[spisok[j][0] - 1]
+        d = gr[spisok[j][1] - 1]
         e = c + d
         if (e % 2 == 0):
             e = 0
         else:
             e = 1
         zakodirovannaya_posledovatelnost.append(e)
-        i = i + 1
-    print(zakodirovannaya_posledovatelnost)
-    zakodirovannaya_posledovatelnost1 = ''.join(str(n) for n in zakodirovannaya_posledovatelnost)
-    print("Получили закодированную строку: ", zakodirovannaya_posledovatelnost1)
-
-elif (kolvo_summatorov == 2):
-    a = input("Введите регистры для первого сумматора: ")
-    b = input("Введите регистры для второго сумматора: ")
-    a = a.split(",")
-    b = b.split(",")
-    a = list(a)
-    b = list(b)
-    for i in range(len(a)):
-        a[i] = int(a[i])
-    for i in range(len(b)):
-        b[i] = int(b[i])
-    print(a)
-    print(b)
-    for i in range(len(bin2_result)):
-        gr.insert(0, bin2_result[i])
-        c = gr[a[0] - 1]
-        d = gr[a[1] - 1]
-        e = c + d
-        if (e % 2 == 0):
-            e = 0
-        else:
-            e = 1
-        # теперь второй сумматор
-        c1 = gr[b[0] - 1]
-        d1 = gr[b[1] - 1]
-        e1 = c1 + d1
-        if (e1 % 2 == 0):
-            e1 = 0
-        else:
-            e1 = 1
-        zakodirovannaya_posledovatelnost.append(e)
-        zakodirovannaya_posledovatelnost.append(e1)
-        i = i + 1
-    print(zakodirovannaya_posledovatelnost)
-    zakodirovannaya_posledovatelnost1 = ''.join(str(n) for n in zakodirovannaya_posledovatelnost)
-    print("Получили закодированную строку: ", zakodirovannaya_posledovatelnost1)
-
-elif (kolvo_summatorov == 3):
-    a = input("Введите регистры для первого сумматора: ")
-    b = input("Введите регистры для второго сумматора: ")
-    z = input("Введите регистры для третьего сумматора: ")
-    a = a.split(",")
-    b = b.split(",")
-    z = z.split(",")
-    a = list(a)
-    b = list(b)
-    z = list(z)
-    for i in range(len(a)):
-        a[i] = int(a[i])
-    for i in range(len(b)):
-        b[i] = int(b[i])
-    for i in range(len(z)):
-        z[i] = int(z[i])
-    print(a)
-    print(b)
-    print(z)
-    for i in range(len(bin2_result)):
-        gr.insert(0, bin2_result[i])
-        c = gr[a[0] - 1]
-        d = gr[a[1] - 1]
-        e = c + d
-        if (e % 2 == 0):
-            e = 0
-        else:
-            e = 1
-        # теперь второй сумматор
-        c1 = gr[b[0] - 1]
-        d1 = gr[b[1] - 1]
-        e1 = c1 + d1
-        if (e1 % 2 == 0):
-            e1 = 0
-        else:
-            e1 = 1
-        # третий
-        c2_ = gr[z[0] - 1]
-        d2_ = gr[z[1] - 1]
-        e2_ = c2_ + d2_
-        if (e2_ % 2 == 0):
-            e2_ = 0
-        else:
-            e2_ = 1
-        zakodirovannaya_posledovatelnost.append(e)
-        zakodirovannaya_posledovatelnost.append(e1)
-        zakodirovannaya_posledovatelnost.append(e2_)
-        i = i + 1
-    print(zakodirovannaya_posledovatelnost)
-    zakodirovannaya_posledovatelnost1 = ''.join(str(n) for n in zakodirovannaya_posledovatelnost)
-    print("Получили закодированную строку: ", zakodirovannaya_posledovatelnost1)
-
-else:
-    print("Введено неверное значение")
-
+        j=j+1
+print(zakodirovannaya_posledovatelnost)
+zakodirovannaya_posledovatelnost1 = ''.join(str(n) for n in zakodirovannaya_posledovatelnost)
+print("Получили закодированную строку: ", zakodirovannaya_posledovatelnost1)
 # кодирование ЗАВЕРШЕНО
 # Теперь декодируем
 # Сделаем функцию (это цифры над линиями в Витерби)
@@ -433,10 +340,10 @@ elif (kolvo_summatorov == 3):
         m_ = m_ + 8
         n_ = n_ + 3
 
-pos = nx.spring_layout(G)
-nx.draw(G, pos, with_labels=True)
-labels = nx.get_edge_attributes(G, 'weight')
-nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+#pos = nx.spring_layout(G)
+#nx.draw(G, pos, with_labels=True)
+#labels = nx.get_edge_attributes(G, 'weight')
+#nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
 
 print(nx.dijkstra_path(G, nodes[0], nodes[-4]))
 print(nx.dijkstra_path(G, nodes[0], nodes[-3]))
@@ -456,7 +363,7 @@ if (kolvo_summatorov==1):
             gr2.append(nx.dijkstra_path(G, nodes[0], nodes[-2])[i][0])
         print("Изначальная последовательность: ", gr2)
 
-else:
+elif (kolvo_summatorov==2):
     if (nx.dijkstra_path_length(G, nodes[0], nodes[-4]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-2])) and (
             nx.dijkstra_path_length(G, nodes[0], nodes[-4]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-3])) and (
             nx.dijkstra_path_length(G, nodes[0], nodes[-4]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-1])):
@@ -483,8 +390,69 @@ else:
         print("Изначальная последовательность: ", gr2)
     else:
         print("Путей с весом ноль нет")
-
-    plt.show()
+else:
+    if (nx.dijkstra_path_length(G, nodes[0], nodes[-4]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-2])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-4]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-3])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-4]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-1])) and (nx.dijkstra_path_length(G, nodes[0], nodes[-4]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-7])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-4]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-5])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-4]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-6])):
+        for i in range(1, len(bin1_result) + 1):
+            gr2.append(nx.dijkstra_path(G, nodes[0], nodes[-4])[i][0])
+        print("Изначальная последовательность: ", gr2)
+    elif (nx.dijkstra_path_length(G, nodes[0], nodes[-2]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-4])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-2]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-3])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-2]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-1])) and (nx.dijkstra_path_length(G, nodes[0], nodes[-2]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-7])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-2]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-5])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-2]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-6])):
+        for i in range(1, len(bin1_result) + 1):
+            gr2.append(nx.dijkstra_path(G, nodes[0], nodes[-2])[i][0])
+        print("Изначальная последовательность: ", gr2)
+    elif (nx.dijkstra_path_length(G, nodes[0], nodes[-3]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-4])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-3]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-2])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-3]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-1])) and (nx.dijkstra_path_length(G, nodes[0], nodes[-3]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-7])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-3]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-5])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-3]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-6])):
+        for i in range(1, len(bin1_result) + 1):
+            gr2.append(nx.dijkstra_path(G, nodes[0], nodes[-3])[i][0])
+        print("Изначальная последовательность: ", gr2)
+    elif (nx.dijkstra_path_length(G, nodes[0], nodes[-1]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-4])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-1]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-3])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-1]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-2])) and (nx.dijkstra_path_length(G, nodes[0], nodes[-1]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-7])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-1]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-5])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-1]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-6])):
+        for i in range(1, len(bin1_result) + 1):
+            gr2.append(nx.dijkstra_path(G, nodes[0], nodes[-1])[i][0])
+        print("Изначальная последовательность: ", gr2)
+    elif (nx.dijkstra_path_length(G, nodes[0], nodes[-5]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-2])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-5]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-3])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-5]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-1])) and (nx.dijkstra_path_length(G, nodes[0], nodes[-5]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-7])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-5]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-4])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-5]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-6])):
+        for i in range(1, len(bin1_result) + 1):
+            gr2.append(nx.dijkstra_path(G, nodes[0], nodes[-5])[i][0])
+        print("Изначальная последовательность: ", gr2)
+    elif (nx.dijkstra_path_length(G, nodes[0], nodes[-6]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-4])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-6]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-3])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-6]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-1])) and (nx.dijkstra_path_length(G, nodes[0], nodes[-6]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-7])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-6]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-2])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-6]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-5])):
+        for i in range(1, len(bin1_result) + 1):
+            gr2.append(nx.dijkstra_path(G, nodes[0], nodes[-6])[i][0])
+        print("Изначальная последовательность: ", gr2)
+    elif (nx.dijkstra_path_length(G, nodes[0], nodes[-7]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-4])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-7]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-2])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-7]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-1])):
+        for i in range(1, len(bin1_result) + 1):
+            gr2.append(nx.dijkstra_path(G, nodes[0], nodes[-7])[i][0])
+        print("Изначальная последовательность: ", gr2)
+    elif (nx.dijkstra_path_length(G, nodes[0], nodes[-8]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-4])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-8]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-3])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-8]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-2])) and (nx.dijkstra_path_length(G, nodes[0], nodes[-8]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-7])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-8]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-1])) and (
+            nx.dijkstra_path_length(G, nodes[0], nodes[-8]) <= nx.dijkstra_path_length(G, nodes[0], nodes[-5])):
+        for i in range(1, len(bin1_result) + 1):
+            gr2.append(nx.dijkstra_path(G, nodes[0], nodes[-8])[i][0])
+        print("Изначальная последовательность: ", gr2)
 
 # преобразуем последовательность в изначальную строку
 # strOfStrings = ''.join(gr2)
@@ -494,16 +462,3 @@ strOfStrings = ''.join(gr2)
 print(strOfStrings)
 revert = ''.join([chr(int(s, 2)) for s in strOfStrings.split()])  # из двоичной в обычную
 print(revert)
-
-
-
-
-
-
-
-
-
-
-
-
-
