@@ -24,10 +24,9 @@ print("gr5", gr5)
 
 kolvo_summatorov = int(input("Введите число сумматоров: "))
 spisok=[]
-kolvo_summatorov = int(input("Введите число сумматоров: "))
 for i in range(kolvo_summatorov):
     spisok.append([int(y) for y in input("Введите регистры для n-го сумматора: ").split()])
-print(spisok)
+print("spisok = ",spisok)
 
     # Теперь пишем алгоритм для сумматора. Если сумматоров>1, то сделать функцию.
 for i in range(len(bin2_result)):
@@ -49,89 +48,45 @@ print("Получили закодированную строку: ", zakodirova
 # кодирование ЗАВЕРШЕНО
 # Теперь декодируем
 # Сделаем функцию (это цифры над линиями в Витерби)
+
+
+res=[]
+for i in range(2**kolvo_summatorov):
+    s=''
+    for j in range(kolvo_summatorov):
+        s=str(i%2)+s
+        i=i//2
+    res.append(s)
+print(res)
+
+gruppa=[]
+for i in range(len(res)):
+    for j in range(kolvo_summatorov):
+        gruppa.append(int(res[i][j]))
+print(gruppa)#целочисленные значения битовой последовательности типа 00,01,10,11
+    
+
 gr1 = []
-if (kolvo_summatorov == 1):
-    def func1(x, y):
-        b_ = [x, y]
-        c2 = int(b_[a[0] - 1])
-        d2 = int(b_[a[1] - 1])
-        e2 = str((c2 + d2) % 2)
-        gr1.append(e2)
-        return (gr1)
+gruppa1=[]#исправить при большом кол-ве регистров
 
+for x in range(len(res)):
+    for i in range(kolvo_summatorov):
+        gruppa1.append(gruppa[i])
+        
+    for j in range(2):
+        gruppa1.insert(0,j)
+        for i in range(2):
+            m=gruppa1[spisok[i][0]-1]
+            n=gruppa1[spisok[i][1]-1]
+            k=(m+n)%2
+            gr1.append(k)
+        gruppa1.pop(0)
+    gruppa1=[]
+    for y in range(kolvo_summatorov):
+        gruppa.pop(0)
+    
+print("gr1= ",gr1)
 
-    func1(0, 0)
-    func1(0, 1)
-    func1(1, 0)
-    func1(1, 1)
-    for i in range(len(gr1)):
-        gr1[i] = int(gr1[i])
-    print("gr1: ", gr1)
-
-elif (kolvo_summatorov == 2):
-    def func1(x, y, z):
-        b_ = [x, y, z]
-        c2 = int(b_[a[0] - 1])
-        d2 = int(b_[a[1] - 1])
-        e2 = str((c2 + d2) % 2)
-        c3 = int(b_[b[0] - 1])
-        d3 = int(b_[b[1] - 1])
-        e3 = str((c3 + d3) % 2)
-        gr1.append(e2)
-        gr1.append(e3)
-        return (gr1)
-
-
-    func1(0, 0, 0)
-    func1(1, 0, 0)
-    func1(0, 1, 0)
-    func1(1, 1, 0)
-    func1(0, 0, 1)
-    func1(1, 0, 1)
-    func1(0, 1, 1)
-    func1(1, 1, 1)
-    for i in range(len(gr1)):
-        gr1[i] = int(gr1[i])
-    print(gr1)
-
-elif (kolvo_summatorov == 3):
-    def func1(x, y, p_, z_):
-        b_ = [x, y, p_, z_]
-        c2 = int(b_[a[0] - 1])
-        d2 = int(b_[a[1] - 1])
-        e2 = str((c2 + d2) % 2)
-        c3 = int(b_[b[0] - 1])
-        d3 = int(b_[b[1] - 1])
-        e3 = str((c3 + d3) % 2)
-        c4 = int(b_[z[0] - 1])
-        d4 = int(b_[z[1] - 1])
-        e4 = str((c4 + d4) % 2)
-        gr1.append(e2)
-        gr1.append(e3)
-        gr1.append(e4)
-        return (gr1)
-    func1(0, 0, 0, 0)
-    func1(1, 0, 0, 0)
-    func1(0, 0, 0, 1)
-    func1(1, 0, 0, 1)
-    func1(0, 0, 1, 0)
-    func1(1, 0, 1, 0)
-    func1(0, 0, 1, 1)
-    func1(1, 0, 1, 1)
-    func1(0, 1, 0, 0)
-    func1(1, 1, 0, 0)
-    func1(0, 1, 0, 1)
-    func1(1, 1, 0, 1)
-    func1(0, 1, 1, 0)
-    func1(1, 1, 1, 0)
-    func1(0, 1, 1, 1)
-    func1(1, 1, 1, 1)
-    for i in range(len(gr1)):
-        gr1[i] = int(gr1[i])
-    print(gr1)
-
-else:
-    print("Неверное кол-во сумматоров")
 
 # строим граф. Его вес рассчитаем зараннее в отдельных переменных
 # Перед этим напишем функцию для расчета веса
@@ -462,3 +417,4 @@ strOfStrings = ''.join(gr2)
 print(strOfStrings)
 revert = ''.join([chr(int(s, 2)) for s in strOfStrings.split()])  # из двоичной в обычную
 print(revert)
+
