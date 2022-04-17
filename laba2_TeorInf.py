@@ -119,6 +119,9 @@ for i in range(len(zakodirovannaya_posledovatelnost) // kolvo_summatorov):
 print("Вес хэминга=",gr2)
 print(len(gr2))
 
+print("len(kod)= ",len(kod))
+print("len(gr1)=",len(gr1))
+
 
 #print("gr2(вес хэминга)=",gr2)#почему-то выводит в 2 раза больше чисел, чем нужно
 gr4=[]
@@ -130,7 +133,8 @@ else:
         for j in range(len(gr1) // kolvo_summatorov):
             gr4.append(gr2[0])
             gr2.pop(0)
-        for k in range(len(gr1) // kolvo_summatorov):
+        #for k in range(len(gr1) // kolvo_summatorov):
+        for k in range(len(gr1)-(len(gr1)//kolvo_summatorov)):
             gr2.pop(0)
     
 print("Вес хэминга = ",gr4)
@@ -159,15 +163,6 @@ print(m)
 print(len(m))
 
 n=[]
-s_=1
-#for s_ in range(1,len(gr4)//8+1):
-#    for j in range(2):
-#        n.append(int(s_)*len(res))
-#        n.append(int(s_)*len(res)+len(res)//2)
-#    for l in range(2):
-##        n.append(int(s_)*len(res)+1)
-#        n.append(int(s_)*len(res)+len(res)//2+1)##ВНИМАНИЕ ЭТО ИСПРАВИТЬ ДЛЯ БЕСКОНЕЧНОГО ЧИСЛА СУММАТОРОВ И РЕГИСТРОВ
-#    s_=s_+1
 for s_ in range(1,len(bin1_result)+1):
     for j in range(len(res)//2):
         for j_ in range(2):
@@ -178,25 +173,13 @@ for s_ in range(1,len(bin1_result)+1):
     
 print(n)
 print(len(n))
-
+##########################################################создаем ребра
 for i in range(len(gr4)):
     G.add_edge(nodes[m[i]],nodes[n[i]],weight=gr4[i])
     i=i+1
+##########################################################
 
 
-
-
-
-
-
-
-
-
-
-
-#print(nx.dijkstra_path(G, nodes[0], nodes[6]))
-##print(nx.dijkstra_path_length(G, nodes[0], nodes[6]))
-#print(nx.dijkstra_path(G, nodes[0], nodes[13]))
 
 
 gr2_=[]
@@ -210,7 +193,6 @@ print(aa)
 for i in range(1, len(bin1_result) + 1):
             gr2_.append(aa[i][0])
 print("Изначальная последовательность: ",gr2_)
-
 
 
 gr5 = []
